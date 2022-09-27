@@ -142,16 +142,25 @@ btn.addEventListener("click",function(){
             let box=document.createElement("input");
             box.setAttribute("type","radio");
             box.setAttribute("class","list");
+        
             // box.setAttribute("onClick","toggle(this,'list')");
             box.setAttribute("name","check"+incmt);
             box.setAttribute("value", optionsList[j]);
             
             cardBody.append(box);
             let choice=document.createElement("label");
-            choice.setAttribute("class","pe-5 ps-2")
+            choice.setAttribute("class","pe-5 ps-2");
+       
             choice.innerText=optionsList[j];
             cardBody.append(choice);
+            
         }
+        let ansTitle=document.createElement("label");
+            ansTitle.innerText="Answer ;";
+            cardBody.append(ansTitle);
+            let answerShow=document.createElement("span");
+            answerShow.setAttribute("id","show"+incmt);
+            cardBody.append(answerShow);
         display.append(row);
         incmt++;
 
@@ -164,18 +173,29 @@ btn.addEventListener("click",function(){
         for(var l=0 ; l<5; l++){
             let name=document.getElementsByName("check"+l)[0];
             let getparnt=name.parentNode;
-            console.log(getparnt);
+            
             let getCls=getparnt.getElementsByClassName("list");
-            console.log(getCls.length);
+
            for(var m=0; m<getCls.length; m++){
             if(getCls[m].checked){
-                // console.log(getCls[m].value);
                 newArr.push(getCls[m].value);
-
             }
            }
            
         }
-        console.log(newArr);
+        
+        for(var n=0 ; n<5 ; n++){
+            let getId=document.getElementById("show"+n);
+            console.log(getId);
+            if(newArr[n] == anslist[n]){
+                getId.innerText=" "+"correct";
+                getId.style.color="green";
+            }
+            else{
+                getId.innerText=" "+"wrong";
+                getId.style.color="red";
+            }
+        }
+        
     })
 })
