@@ -1,44 +1,24 @@
 
 var qus=[{
-    no:"Any one block element",
-    options:["input","output","p","summary"],
-    ans:"p"
+    no:"What is the smallest header in HTML by default?",
+    options:["h1","h2","h6","h5"],
+    ans:"h6"
 },{
-    no:"Any one inline element",
-    options:["section","ul","li","sup"],
-    ans:"sup"
+    no:"How to create an ordered list in HTML?",
+    options:["ol","ul","li","href"],
+    ans:"ol"
 },{
-    no:"Any one sematic element",
-    options:["footer","span","ol","label"],
-    ans:"footer"
+    no:"HTML files are saved by default with the extension?",
+    options:[".html",".HTML","h",".text"],
+    ans:".html"
 },{
-    no:"Any one non-sematic element",
-    options:["footer","span","header","label"],
-    ans:"span"
+    no:"Which attribute is used to provide a unique name to an HTML element?",
+    options:["class","id","type","name"],
+    ans:"id"
 },{
-    no:"Any one formatting element",
-    options:["footer","span","b","label"],
-    ans:"b"
-},{
-    no:"Any one block element",
-    options:["input","output","p","summary"],
-    ans:"p"
-},{
-    no:"Any one inline element",
-    options:["section","ul","li","sup"],
-    ans:"sup"
-},{
-    no:"Any one sematic element",
-    options:["footer","span","ol","label"],
-    ans:"footer"
-},{
-    no:"Any one non-sematic element",
-    options:["footer","span","header","label"],
-    ans:"span"
-},{
-    no:"Any one formatting element",
-    options:["footer","span","b","label"],
-    ans:"b"
+    no:"Which property is used to set border colors in HTML?",
+    options:["border-color","border","outline","both a&b"],
+    ans:"border"
 },{
     no:"Any one block element",
     options:["input","output","p","summary"],
@@ -60,69 +40,80 @@ var qus=[{
     options:["footer","span","b","label"],
     ans:"b"
 },{
-    no:"Any one block element",
-    options:["input","output","p","summary"],
-    ans:"p"
+    no:"How can we select an element with a specific ID in CSS?",
+    options:["*",".","#",">"],
+    ans:"#"
 },{
-    no:"Any one inline element",
-    options:["section","ul","li","sup"],
-    ans:"sup"
+    no:"margin: 25px 50px 75px 100px; formet?",
+    options:["trbl","tbrl","tlbr","lrtb"],
+    ans:"trbl"
 },{
-    no:"Any one sematic element",
-    options:["footer","span","ol","label"],
-    ans:"footer"
+    no:"Setting an inline-block in CSS requires which of the following properties?",
+    options:["color","block","display","all above"],
+    ans:"display"
 },{
-    no:"Any one non-sematic element",
-    options:["footer","span","header","label"],
-    ans:"span"
+    no:"width: 310px;padding: 20px;border: 5px solid blue;margin: 0; total width?",
+    options:["310","350","355","360"],
+    ans:"360"
 },{
-    no:"Any one formatting element",
-    options:["footer","span","b","label"],
-    ans:"b"
+    no:"In how many ways can CSS be written in?",
+    options:["1","2","3","4"],
+    ans:"3"
 },{
-    no:"Any one formatting element",
-    options:["footer","span","b","label"],
-    ans:"b"
+    no:"How can we select an element with a specific Class in CSS?",
+    options:["#","*",".",">"],
+    ans:"."
+},{
+    no:"The CSS property used to specify the transparency of an element is?",
+    options:["visibility","display","opacity","color"],
+    ans:"opacity"
+},{
+    no:"Which of the following CSS property is used for controlling the layout?",
+    options:["color","text","opacity","display"],
+    ans:"display"
+},{
+    no:"Which of the following are parts of the CSS box model?",
+    options:["margin","padding","border","all"],
+    ans:"all"
+},{
+    no:"Which of the following are units of relative length in CSS?",
+    options:["em","rem","a&b","meter"],
+    ans:"a&b"
+},{
+    no:"which is input type?",
+    options:["password","number","text","all"],
+    ans:"all"
 }];
+
+let display=document.getElementById("display");
+let btn=document.getElementById("btn");
 
 function generateNumber(){
     var x=Math.floor(Math.random()*20);
     return x;
 }
 
-var randomNum,isUnique,storeNum=[];
-while(storeNum.length<6){
-randomNum=generateNumber();
-isUnique=storeNum.every(function(num){
-    return randomNum !== num;
-})
-if(isUnique){
-    storeNum.push(randomNum);
-};
+function generateNumbers(){
+    var randomNum,isUnique,storeNum=[];
+    while(storeNum.length<5){
+            randomNum=generateNumber();
+            isUnique=storeNum.every(function(num){
+            return randomNum !== num;
+        })
+        if(isUnique){
+        storeNum.push(randomNum);
+        };
+    }
+    return storeNum;
 }
-console.log(storeNum);
-var randomQus=[];
-let btn=document.getElementById("btn");
-let display=document.getElementById("display");
-let incmt=0;
-let anslist=[]
 
-btn.addEventListener("click",function(){
-    for(var i=1; i<=5; i++){
+function generateQustions(storeNum){
+    let incmt=0;
+    let qusNo=1;
+    for(var i=0; i<5; i++){
        
         let list=qus[storeNum[i]].no;
         let optionsList=qus[storeNum[i]].options;
-        let answer=qus[storeNum[i]].ans;
-   
-
-        for(var k=0 ; k<4 ; k++){
-            console.log(optionsList[k]);
-
-            if(optionsList[k]==answer){
-                anslist.push(optionsList[k]);
-            }
-        }
-        console.log(anslist);
 
         let row=document.createElement("div");
         row.setAttribute("class","row");
@@ -136,14 +127,13 @@ btn.addEventListener("click",function(){
         cardBody.setAttribute("class","card-body");
         card.append(cardBody);
         let qustion=document.createElement("h4");
-        qustion.innerText=i+","+list;
+        qustion.innerText=qusNo +","+list;
         cardBody.append(qustion);
         for(var j=0; j<4; j++){
             let box=document.createElement("input");
             box.setAttribute("type","radio");
             box.setAttribute("class","list");
         
-            // box.setAttribute("onClick","toggle(this,'list')");
             box.setAttribute("name","check"+incmt);
             box.setAttribute("value", optionsList[j]);
             
@@ -163,39 +153,55 @@ btn.addEventListener("click",function(){
             cardBody.append(answerShow);
         display.append(row);
         incmt++;
-
+        qusNo++;
     }
     
-    let sufferBtn=document.getElementById("suffer");
-    sufferBtn.style.display="inline-block";
-    sufferBtn.addEventListener("click",function(){
-        let newArr = [];
+    let submitBtn=document.getElementById("submit");
+    submitBtn.style.display="inline-block";
+    submitBtn.addEventListener("click",function(){
         for(var l=0 ; l<5; l++){
+            let answer=qus[storeNum[l]].ans;
+            console.log(answer);
             let name=document.getElementsByName("check"+l)[0];
             let getparnt=name.parentNode;
-            
             let getCls=getparnt.getElementsByClassName("list");
+            let getId=document.getElementById("show"+l);
 
            for(var m=0; m<getCls.length; m++){
             if(getCls[m].checked){
-                newArr.push(getCls[m].value);
+                let selectans=getCls[m].value;
+                console.log(selectans);
+                if(selectans == answer){
+                    getId.innerText=" "+"correct";
+                    getId.style.color="white";
+                    getId.style.backgroundColor="green";
+                }
+                else{
+                    getId.innerText=" "+"wrong";
+                    getId.style.color="white";
+                    getId.style.backgroundColor="red";
+
+                    console.log("mani")
+                }
+
             }
            }
-           
         }
-        
-        for(var n=0 ; n<5 ; n++){
-            let getId=document.getElementById("show"+n);
-            console.log(getId);
-            if(newArr[n] == anslist[n]){
-                getId.innerText=" "+"correct";
-                getId.style.color="green";
-            }
-            else{
-                getId.innerText=" "+"wrong";
-                getId.style.color="red";
-            }
-        }
-        
     })
+    let sufferBtn=document.getElementById("suffer");
+    sufferBtn.style.display="inline-block";
+
+    sufferBtn.addEventListener("click",function(){
+    btn.style.display="none";
+    display.innerHTML="";
+    storeNum=generateNumbers();
+    generateQustions(storeNum);
+
+})
+}
+
+btn.addEventListener("click",function(){
+    let storeNum=generateNumbers();
+    generateQustions(storeNum);
+    console.log(storeNum);
 })
